@@ -10,11 +10,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 10f; 
     [SerializeField] PlayerHealth playerhealth;
     [SerializeField] CoinCollector coincollector;
+    [SerializeField] CheckPoint checkpoints;
     private Rigidbody rb;
     private bool isGrounded;
+   
 
     private void Start()
     {
+       
         rb = GetComponent<Rigidbody>();
     }
 
@@ -50,10 +53,17 @@ public class PlayerController : MonoBehaviour
             playerhealth.Die(); 
             playerhealth.currentHealth = 0;
         }
-        if (collision.gameObject.CompareTag("Obsticles"))
+        if (collision.gameObject.CompareTag("Obstacle"))
         {
-            Debug.Log("Collide");
+            
             playerhealth.TakeDamage();
+        }
+
+        if (collision.gameObject.CompareTag("CheckPointObsticles"))
+        {
+            playerhealth.TakeDamage();
+            checkpoints.Respawn();
+           
         }
         
     }
@@ -67,6 +77,5 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    
- 
+
 }

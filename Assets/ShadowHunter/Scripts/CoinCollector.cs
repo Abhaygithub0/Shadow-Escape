@@ -29,6 +29,6 @@ public class CoinCollector : MonoBehaviour
 
     private void updadescorevalue()
     {
-        textUGI.text = "Coin" + score;
+        textUGI.text = " Coin " + score;
     }
 }
