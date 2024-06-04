@@ -10,6 +10,7 @@ public class PlatformMoving : MonoBehaviour
     {
         if (other.gameObject == player)
         {
+            SoundManager.Instance.play(soundplaces.platformer);
             player.transform.parent = transform;
         }
     }

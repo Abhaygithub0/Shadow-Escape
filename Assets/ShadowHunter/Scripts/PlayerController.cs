@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerHealth playerhealth;
     [SerializeField] CoinCollector coincollector;
     [SerializeField] CheckPoint checkpoints;
+    [SerializeField] GameObject EndLevelUI;
     private Rigidbody rb;
     private bool isGrounded;
    
@@ -45,25 +46,25 @@ public class PlayerController : MonoBehaviour
        
         if (collision.gameObject.CompareTag("Ground"))
         {
+            SoundManager.Instance.play(soundplaces.Playerland);
             isGrounded = true;
         }
         if (collision.gameObject.CompareTag("DeathZone"))
         {
-            rb.drag = 100;
-            playerhealth.Die(); 
-            playerhealth.currentHealth = 0;
+            SoundManager.Instance.play(soundplaces.Playerdeath);
+            playerhealth.TakeDamage();
+            checkpoints.Respawn();
         }
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            
+            SoundManager.Instance.play(soundplaces.Obsticles);
             playerhealth.TakeDamage();
         }
 
-        if (collision.gameObject.CompareTag("CheckPointObsticles"))
+        if (collision.gameObject.CompareTag("EndCube"))
         {
-            playerhealth.TakeDamage();
-            checkpoints.Respawn();
-           
+            SoundManager.Instance.play(soundplaces.LevelComplete);
+            EndLevelUI.SetActive(true);
         }
         
     }
@@ -72,6 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Coin"))
         {
+           
             coincollector.incrementvalue(10);
             
         }
