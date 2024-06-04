@@ -6,12 +6,12 @@ TagManager:
   tags:
   - Ground
   - DeathZone
-  - Obsticles
   - Coin
   - FxTemporaire
   - Obstacle
   - CheckPointObsticles
   - CheckPoint
+  - EndCube
   layers:
   - Default
   - TransparentFX
